@@ -75,6 +75,14 @@ parameters:
 # gluster volume list
 ```
 
+## 制作离线客户端安装包
+### ubuntu
+```
+// apt 安装包下载至此目录下
+# ls /var/cache/apt/archives
+// dpkg 使用deb安装包
+# dpkg -i XXX.deb
+```
 
 ## 参考资料
 1. IBM glusterfs配置：https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0/installing/storage_settings.html
