@@ -35,7 +35,7 @@
 ```
 #### 添加Ceph包到库中
 ```
-  echo deb https://download.ceph.com/debian-luminous/ $(lsb_release -sc) main | sudo tee /etc/apt/sources.list.d/ceph.list
+  echo deb https://download.ceph.com/debian-jewel/ $(lsb_release -sc) main | sudo tee /etc/apt/sources.list.d/ceph.list
 ```
 #### 更新库并安装ceph-deploy
 ```
@@ -48,12 +48,12 @@ ntp用作对时工具，ssh用来admin节点免密登录node节点
 #### 安装ntp
 ```
  sudo apt-get update
- sudo apt-get install ntp     //安装ntp
+ sudo apt-get install ntp -y    //安装ntp
  sudo /etc/init.d/ntp status  //查看ntp服务状态
 ```
 #### 安装ssh服务器
 ```
- sudo apt-get install openssh-server
+ sudo apt-get install openssh-server -y
 ```
 
 ### 配置免密登录
@@ -69,6 +69,27 @@ ntp用作对时工具，ssh用来admin节点免密登录node节点
    sudo chmod 0440 /etc/sudoers.d/deploy
   ```
 
+ - 使用root登陆
+ ```
+ $ sudo -i
+ $ vim /etc/ssh/sshd_config
+    ...
+    LoginGraceTime 120
+    PermitRootLogin yes
+    StrictModes yes
+
+    RSAAuthentication yes
+    PubkeyAuthentication yes
+    ...
+    UsePAM yes
+    PasswordAuthentication yes
+    GSSAPIAuthentication no
+    UseDNS no
+    ClientAliveInterval 120
+    ClientAliveCountMax 720
+  $ service restart service
+ ```
+ 
 #### admin中
 - 修改/etc/hosts
 

@@ -1,7 +1,7 @@
 # Ceph RBD in Kubernetes
 
 本文旨在介绍RBD与Kubernetes结合使用
-
+ceph-common/xenial-updates,now 10.2.9-0ubuntu0.16.04.1 
 ## Ceph介绍
 - Ceph在Ceph存储集群之上提供对象存储（RadosGW），块存储（RadosBlockDevice，RBD）和文件存储（CephFS）三种功能的服务。由于仅有RBD支持Kubernetes的StorageClass，所以仅讨论RBD。
 
