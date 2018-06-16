@@ -25,7 +25,7 @@ ceph-common/xenial-updates,now 10.2.9-0ubuntu0.16.04.1
 ## Kubernetes中使用Ceph
 *. RBD(Rados Block Device) .*
 
-- RBD可以被多个Pod同时以只读挂载(经实验证明，类似快照，并不会实时更新RBD卷的内容)
+- RBD可以被多个Pod同时以只读挂载(不会实时更新RBD卷的内容)
 - RBD仅可被一个Pod以读写方式挂载
 
 ## [RBD as Volume](https://github.com/kubernetes/examples/tree/master/staging/volumes/rbd)
@@ -157,7 +157,7 @@ set-quota max_bytes = 10737418240 for pool pool1
 ```
 # ceph auth get-key client.admin
 XXX
-# eho "XXX" | base64
+# echo -n "XXX" | base64
 ```
 或
 ```

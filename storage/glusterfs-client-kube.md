@@ -1,8 +1,12 @@
-# glusterfs-kube
+# Glusterfs client install
 Kubernetes使用glusterfs作动态数据卷分配来源，并已使用heketi管理端管理GlusterFS卷
 
 ## 准备材料
 - glusterfs集群，并配置heketi集群管理工具
+目前可供测试GLusterFS集群Heketi节点为：
+ssh -P 10214 root@139.198.5.132
+密码：Wx123456
+
 - gluster-client-ubuntu16.04.tar
 - kubernetes node ubuntu 16.04
 
@@ -13,7 +17,6 @@ modprobe dm_thin_pool
 echo dm_thin_pool | sudo tee -a /etc/modules
 ```
 
-
 ## 安装gluster-client
 ```
 # tar -xf gluster-client-ubuntu16.04.tar
@@ -22,8 +25,8 @@ echo dm_thin_pool | sudo tee -a /etc/modules
 ```
 
 ## 获取glusterfs集群信息
-
 ### 生成k8s对象glusterfs sc连接glusterfs所使用的密钥
+在heketi主机操作
 ```
 //进入heketi主机
 cat /etc/heketi/heketi.json
@@ -95,11 +98,6 @@ cat /etc/heketi/heketi.json
 ```
 
 
-```
-// from-literal=key内容来自jwt.admin.key
-kubectl create secret generic heketi-secret   --type="kubernetes.io/glusterfs" --from-literal=key='XXX'   --namespace=default
-```
-
 ### 获取glusterfs集群id
 ```
 # export HEKETI_CLI_SERVER=http://localhost:8080
@@ -109,7 +107,13 @@ d7a40738e7a6d1e6e284ba8190d3224c
 
 ```
 
+
 ## Kubernetes验证
+### 创建secret
+```
+// from-literal=key内容来自heketi的/etc/heketi/heketi.json的jwt.admin.key字段
+kubectl create secret generic heketi-secret   --type="kubernetes.io/glusterfs" --from-literal=key='XXX'   --namespace=default
+```
 
 ### 创建storageclass
 ```
