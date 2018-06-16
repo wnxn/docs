@@ -8,6 +8,10 @@
 ## 步骤一：环境准备
 ### 申请机器
 4台ubuntu 14主机，2 CPU 2G RAM。
+ubuntu 14.04.5 LTS
+ceph-deploy v1.4.0
+ceph-common 0.80.11-0ubuntu1.14.04.3
+
 ```
                                _______________
                               |               |
@@ -35,10 +39,11 @@
 ```
 #### 添加Ceph包到库中
 ```
-  echo deb https://download.ceph.com/debian-jewel/ $(lsb_release -sc) main | sudo tee /etc/apt/sources.list.d/ceph.list
+  echo deb https://download.ceph.com/debian-luminous/ $(lsb_release -sc) main | sudo tee /etc/apt/sources.list.d/ceph.list
 ```
 #### 更新库并安装ceph-deploy
 ```
+  sudo apt-get upgrade
   sudo apt-get update
   sudo apt-get install ceph-deploy
 ```
@@ -50,6 +55,7 @@ ntp用作对时工具，ssh用来admin节点免密登录node节点
  sudo apt-get update
  sudo apt-get install ntp -y    //安装ntp
  sudo /etc/init.d/ntp status  //查看ntp服务状态
+ sudo apt install python-minimal
 ```
 #### 安装ssh服务器
 ```
@@ -150,7 +156,7 @@ osd pool default size = 2
 
 #### 安装ceph
 ```
-ceph-deploy install admin node1 node2 node3
+ceph-deploy install admin node1 node2 node3 --release luminous
 ```
 
 #### 配置初始monitor
