@@ -1,132 +1,75 @@
-# Day 1
-## Chapter 1：课程介绍
-1. ~~理解 Kubernetes 设计原则、原理~~
-1. ~~了解 Kubernetes 的过去、现在和未来~~
-1. 了解并学会使用 Kubernetes 最重要的资源 — API
-1. 学会如何创建和管理应用，并配置应用外部访问
-1. 理解 Kubernetes 网络、存储
-1. 掌握 Kubernetes 调度的原理和策略
-1. Kubernetes 一些新功能的概念
-1. 了解 Kubernetes 的日志、监控方案
-1. 具备基本的故障排查的运维能力
+## 核心概念 (19%)
+1. 理解Kubernetes API primitives
+1. 理解K8S集群架构
+1. 理解Service和其他网络primitives
 
-## Chapter 2：Kubernetes 基本概念
+## 安装，配置和验证(12%)
+1. 设计k8s集群
+1. 安装k8s master和nodes，包括使用TLS bootstrapping使用
+1. 配置集群安全通信
+1. 配置高可用k8s集群
+1. 了解k8s发布包获取地址
+1. 提供基础设施以部署k8s集群
+1. 选择网络解决方案
+1. 选择k8s基础设施配置
+1. 运行集群内端到端的测试
+1. 分析端到端测试结果
+1. 运行节点端到端测试
 
-1. 了解什么是 Kubernetes
-1. 了解 Kubernetes 的主要特性
-1. 理解为什么需要 Kubernetes
-1. 了解 Kubernetes 的过去、现在和未来
-1. 了解目前 Kubernetes 社区的情况和被采用情况
-1. 了解 Kubernetes 的基本架构
-1. 获得一些学习资料推荐
+## 安全（12%）
+1. 了解如何配置认证和授权
+1. 理解k8s安全primitives
+1. 了解网络策略配置
+1. 为集群组件创建和管理TLS认证
+1. 镜像安全
+1. 定义安全contexts
+1. 加密key-value仓库
+1. 基于角色的访问控制
 
-## Chapter 3：Kubernetes 架构及原理
+## 网络（11%）
+1. 理解集群节点的网络配置
+1. 理解Pod网络概念
+1. 理解service网络
+1. 部署和配置网络lb
+1. 了解如何使用Ingress规则
+1. 了解如何配置并使用集群DNS
+1. 理解CNI
 
-1. 理解 Kubernetes 设计原则
-1. 深入理解 Kubernetes 集群中的组件及功能
-1. 了解 Kubernetes 集群对网络的预置要求
-1. 深入理解 Kubernetes 的工作原理
-1. 深入理解 Kubernetes 中 Pod 的设计思想
+## 集群维护（11%）
+1. 理解k8s集群升级步骤
+1. 操作系统升级
+1. 备份和恢复的方法论
 
-## Chapter 4：Kubernetes 安装和配置
+## 排除故障（10%）
+1. 排除应用故障
+1. 排除控制面板故障
+1. 排除工作节点故障
+1. 排除网络故障
 
-1. 了解部署 Kubernetes 的多种方式
-1. 可以单机部署 Kubernetes（学习演示使用）
-1. 可以在宿主机部署一套 Kubernetes 集群（非生产使用）
+## 应用生命周期管理（8%）
+1. 理解Deployment和如何实施滚动升级与回滚
+1. 了解配置应用的不同方法
+1. 了解如何扩展应用
+1. 理解创建自愈性应用的primitives
 
-## Chapter 5：Kubernetes API 及集群访问
+## 存储（7%）
+1. 理解PV和如何创建它们
+1. 理解volumes的access modes
+1. 理解PVC primitives
+1. 理解k8s存储对象
+1. 了解如何配置有pv的应用
 
-1. 了解 Kubernetes 的 API
-1. 理解 Kubernetes 中 API 资源的结构定义
-1. 了解 kubectl 工具的使用
-1. 了解 Kubernetes 中 API 之外的其他资源
+## 调度（5%）
+1. 使用label selector来调度pods
+1. 理解DaemonSet的角色
+1. 理解resource limit如何影响pod调度的
+1. 理解如何运行多重调度器并如何配置pods来使用它们
+1. 不使用调度器来手动调度pod
+1. 显示调度器的event
+1. 了解如何配置k8s调度器
 
-## Chapter 6：ReplicaController，ReplicaSets 和 Deployments
-
-1. 理解 RC
-1. 理解 label 和 selector 的作用
-1. 理解 RS
-1. 理解 Deployments 并且可操作 Deployments
-1. 理解 rolling update 和 rollback
-
-## Chapter 7：Volume、配置文件及密钥
-
-1. 了解 Kubernetes 存储的管理，支持存储类型
-1. 理解 Pod 使用 volume 的多种工作流程以及演化
-1. 理解 pv 和 pvc 的原理
-1. 理解 storage class 的原理
-1. 理解 configmaps 的作用和使用方法
-1. 理解 secrets 的作用和使用方法资源结构
-
-# Day 2
-## Chapter 8：Service 及服务发现
-
-1. 了解 Docker 网络和 Kubernetes 网络
-1. 了解 Flannel 和 Calico 网络方案
-1. 理解 Pod 在 Kubernetes 网络中的工作原理
-1. 理解 Kubernetes 中的 Service
-1. 理解 Service 在 Kubernetes 网络中的工作原理
-1. 理解 Kubernetes 中的服务发现
-1. 掌握 Kubernetes 中外部访问的几种方式
-
-## Chapter 9：Ingress 及负载均衡
-
-1. 理解 Ingress 和 Ingress controller 的工作原理
-1. 掌握如何创建 Ingress 规则
-1. 掌握如何部署 Ingress controller
-
-# Day 3
-## Chapter 10：DaemonSets，StatefulSets，Jobs，HPA，RBAC
-
-1. 了解 DaemonSet 资源和功能
-1. 了解 StatefulSet 资源和功能
-1. 了解 Jobs 资源和功能
-1. 了解 HPA 资源和功能
-1. 了解 RBAC 资源和功能
-
-## Chapter 11：Kubernetes 调度
-
-1. 理解 Pod 调度的相关概念
-1. 深度理解 Kubernetes 调度策略和算法
-1. 深度理解调度时的 Node 亲和性
-1. 深度理解调度时的 Pod 亲和性和反亲和性
-1. 深度理解污点和容忍对调度的影响
-1. 深度理解强制调度 Pod 的方法
-
-## Chapter 12：日志、监控、Troubleshooting
-
-1. 理解 Kubernetes 集群的日志方案
-1. 理解 Kubernetes 集群的监控方案
-1. 了解相关开源项目：Heapster，Fluentd，Prometheus 等
-1. 掌握常用的集群，Pod，Service 等故障排查和运维手段
-
-## Chapter 13：自定义资源 CRD
-
-1. 理解和掌握 Kubernetes 中如何自定义 API 资源
-1. 可以通过 kubectl 管理 API 资源
-1. 了解用于自定义资源的 Controller 及相关使用示例
-1. 了解 TPR 和 CRD
-
-## Chapter 14：Kubernetes Federation
-
-1. 了解 Kubernetes 中 Federation 的作用和原理
-1. 了解 Federation 的创建过程
-1. 了解 Federation 支持的 API 资源
-1. 了解集群间平衡 Pod 副本的方法
-
-## Chapter 15：应用编排 Helm，Chart
-
-1. 了解 Kubernetes 中如何进行应用编排
-1. 了解 Helm 的作用和工作原理
-1. 了解 Tiller 的作用和工作原理
-1. 了解 Charts 的作用和工作原理
-
-## Chapter 16：Kubernetes 安全
-
-1. 了解 Kubernetes 中 API 访问过程
-1. 了解 Kubernetes 中的 Authentication
-1. 了解 Kubernetes 中的 Authorization
-1. 了解 ABAC 和 RBAC 两种授权方式
-1. 了解 Kubernetes 中的 Admission
-1. 了解 Pod 和容器的操作权限安全策略
-1. 了解 Network Policy 的作用和资源配置方法
+## 日志/监控（5%）
+1. 理解如何监控所以集群组件
+1. 理解如何监控应用
+1. 管理集群模块的日志
+1. 管理应用日志
