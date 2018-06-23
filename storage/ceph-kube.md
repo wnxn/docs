@@ -150,7 +150,7 @@ set-quota max_bytes = 10737418240 for pool pool1
 
 - 在ceph-client节点上，创建文件系统后就可以使用块设备了
 ```console
-# sudo mkfs.ext4 -m0 /dev/rbd/rbd/foo
+# sudo mkfs.ext4 -m0 /dev/rbd /rbd/foo
 ```
 
 #### 生成RBD访问密钥
