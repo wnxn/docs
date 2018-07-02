@@ -1,6 +1,29 @@
 # Glusterfs client install
 Kubernetes使用glusterfs作动态数据卷分配来源，并已使用heketi管理端管理GlusterFS卷
 
+## 在线安装
+ubuntu16.04
+http://redcrackle.com/blog/how-connect-glusterfs-client-machine
+### 修改文件(如有)
+
+```
+# cat download_docker_com_linux_ubuntu.list
+deb [arch=adm64] https://download.docker.com/linux/ubuntu xenial stable
+```
+
+### 增加Glusterfs PPA
+
+```
+# add-apt-repository ppa:gluster/glusterfs-3.12
+# apt-get update
+```
+
+### 安装glusterfs
+
+```
+# apt-get install glusterfs-client
+```
+
 ## 准备材料
 - glusterfs集群，并配置heketi集群管理工具
 目前可供测试GLusterFS集群Heketi节点为：
