@@ -30,6 +30,9 @@ cat /proc/mounts
 go test -v mount_test.go -count=1
 ```
 
+## GO report
+[![Go Report Card](https://goreportcard.com/badge/github.com/yunify/qingcloud-csi)](https://goreportcard.com/report/github.com/yunify/qingcloud-csi)
+
 # CSI
 
 ## csi-test
