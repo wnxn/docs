@@ -38,5 +38,5 @@ go test -v mount_test.go -count=1
 ## csi-test
 
 ```
-./csi-sanity --endpoint=csi_endpoint=unix://var/lib/kubelet/plugins/csi-qingcloud/csi.sock
+./csi-sanity --csi.endpoint=/var/lib/kubelet/plugins/csi-qingcloud/csi.sock
 ```
