@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-deploy
+  labels:
+    name: redis-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      name: redis
+  template:
+    metadata:
+      labels:
+        name: redis
+    spec:
+      containers:
+      - name: con1
+        image: redis
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - name: storage
+          mountPath: /data/redis
+        - name: storage2
+          mountPath: /root
+      - name: con2
+        image: httpd
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - name: storage
+          mountPath: /mnt
+        - name: storage2
+          mountPath: /root
+      volumes:
+      - name: storage
+        emptyDir: {}
+      - name: storage2
+        emptyDir: { medium: Memory }

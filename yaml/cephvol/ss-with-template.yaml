@@ -1,0 +1,30 @@
+apiVersion: apps/v1beta2
+kind: StatefulSet
+metadata:
+  name: server
+spec:
+  replicas: 2
+  serviceName: server-ss
+  selector:
+    matchLabels:
+      role: server
+  template:
+    metadata:
+      labels:
+        role: server
+    spec:
+      containers:
+      - name: server
+        image: nginx
+        volumeMounts:
+          - mountPath: /var/lib/www/html
+            name: mypvc
+  volumeClaimTemplates:
+  - metadata:
+      name: mypvc
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: fast
+      resources:
+        requests:
+          storage: 1Gi

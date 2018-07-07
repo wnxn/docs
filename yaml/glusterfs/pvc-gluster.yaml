@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    type: pvc
+  annotations:
+    name: "wx"
+    phone: "123456"
+    company: "qingcloud"
+    project: "kubesphere"
+  name: gluster-pvc
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Mi

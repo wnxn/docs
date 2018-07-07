@@ -1,0 +1,13 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: rwx
+spec:
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 8Gi
+  storageClassName: gluster
+  glusterfs:
+    endpoints: glusterfs-dynamic-gluster-pvc
+    path: /data/brick1/foo

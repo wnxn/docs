@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  annotations:
+    name: "wx"
+    phone: "123456"
+    company: "qingcloud"
+    project: "kubesphere"
+  name: claim-local
+spec:
+  accessModes:
+# ReadWriteOnce: the volume can be mounted as read-write by a single node
+    - ReadOnlyMany
+  storageClassName: local
+  resources:
+    requests:
+      storage: 3Gi
