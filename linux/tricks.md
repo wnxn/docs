@@ -14,6 +14,13 @@ file context...
 EOF
 ```
 
+## free password login
+
+```
+ssh-keygen
+ssh-copy-id -i ~/.ssh/id_rsa.pub root@192.168.1.16
+```
+
 # Volume
 
 ## Mount table
