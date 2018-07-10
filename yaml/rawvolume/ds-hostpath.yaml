@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  name: redis-ds
+spec:
+  template:
+    metadata:
+      labels:
+        apps: redis-ds
+    spec:
+      containers:
+      # This container is run once on each Node in the cluster
+      - name: redis
+        image: redis
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - name: empty-storage
+          mountPath: /data/redis
+      - name: con2
+        image: httpd
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - name: empty-storage
+          mountPath: /mnt
+        - name: empty-storage
+          mountPath: /root
+      volumes:
+      - name: empty-storage
+        hostPath:
+          path: /etc
+      - name: empty-storage2
+        emptyDir: {}

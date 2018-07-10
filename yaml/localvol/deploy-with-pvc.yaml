@@ -1,0 +1,27 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: server-non
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: server-non
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: server-non
+    spec:
+      containers:
+      - image: nginx
+        imagePullPolicy: IfNotPresent
+        name: server-non
+        volumeMounts:
+        - mountPath: /root
+          name: storage
+      volumes:
+      - name: storage
+        persistentVolumeClaim:
+          claimName: claim-local

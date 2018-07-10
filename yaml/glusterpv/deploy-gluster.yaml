@@ -1,0 +1,28 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: test-bound
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-bound
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: test-bound
+    spec:
+      containers:
+      - image: nginx
+        imagePullPolicy: IfNotPresent
+        name: nginx
+        volumeMounts:
+        - mountPath: /root
+          name: storage
+          readOnly: false
+      volumes:
+      - name: storage
+        persistentVolumeClaim:
+          claimName: rwx

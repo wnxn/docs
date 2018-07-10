@@ -1,0 +1,28 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: server-ceph
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: server-ceph
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: server-ceph
+    spec:
+      containers:
+      - image: nginx
+        imagePullPolicy: IfNotPresent
+        name: server-non
+        volumeMounts:
+        - mountPath: /root
+          name: storage
+          readOnly: false
+      volumes:
+      - name: storage
+        persistentVolumeClaim:
+          claimName: claim-rox
