@@ -21,6 +21,12 @@ ssh-keygen
 ssh-copy-id -i ~/.ssh/id_rsa.pub root@192.168.1.16
 ```
 
+## scp
+
+```
+scp -rP 10104 ./office root@192.168.176.56:~/
+```
+
 # Volume
 
 ## Mount table
@@ -29,12 +35,18 @@ ssh-copy-id -i ~/.ssh/id_rsa.pub root@192.168.1.16
 cat /proc/mounts
 ```
 
+## Glusterfs topology
+
+```
+heketi-cli topology info
+```
+
 # Go
 
 ## Test one testfile
 
 ```
-go test -v mount_test.go -count=1
+go test -v mount_test.go TestRefreshAccessToken -count=1
 ```
 
 ## GO report
@@ -46,4 +58,12 @@ go test -v mount_test.go -count=1
 
 ```
 ./csi-sanity --csi.endpoint=/var/lib/kubelet/plugins/csi-qingcloud/csi.sock
+```
+
+## access apiserver by secret account toekn
+
+```
+$ APISERVER=$(kubectl config view | grep server | cut -f 2- -d ":" | tr -d " ")
+$ TOKEN=$(kubectl describe secret $(kubectl get secrets | grep default | cut -f1 -d ' ') | grep -E '^token' | cut -f2 -d':' | tr -d '\t')
+$ curl -i -H "Authorization: Bearer TOKEN" https://192.168.0.80:6443/api/v1/namespaces/default/services/kubernetes
 ```
