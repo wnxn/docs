@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: annotation-default-scheduler
+  namespace: default
+  labels:
+    name: multischeduler-example
+spec:
+  nodeName: node2
+  schedulerName: kube-scheduler
+  containers:
+  - name: pod-with-default-annotation-container
+    image: k8s.gcr.io/pause:2.0
