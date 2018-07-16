@@ -21,6 +21,13 @@ ssh-keygen
 ssh-copy-id -i ~/.ssh/id_rsa.pub root@192.168.1.16
 ```
 
+## LC_TYPE
+
+```
+export LC_ALL="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
+```
+
 ## scp
 
 ```

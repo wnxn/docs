@@ -1,5 +1,5 @@
 # neonsan
-如何看image是否map
+
 ## create volume
 
 ```
@@ -29,6 +29,16 @@ Volume Count:  1
 
 ```
 qbd -m csi/foo1
+```
+
+### check map
+
+```
+# qbd -l
+dev_id  vol_id  device  volume  config  read_bps    write_bps   read_iops   write_iops
+0   0x3ff7000000    qbd0    csi/foo1    /etc/neonsan/qbd.conf   0   0   0   0
+1   0x3a7c000000    qbd1    csi/foo /etc/neonsan/qbd.conf   0   0   0   0
+
 ```
 
 ### umap volume
