@@ -130,6 +130,13 @@ Free Inodes          : 1047525
 ```
 
 ## client安装
+### 解决服务端安装问题
+
+```
+https://blog.csdn.net/styshoo/article/details/79223728
+
+```
+
 若无glusterfs命令，则安装
 ```
 apt install glusterfs-client
