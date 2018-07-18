@@ -10,7 +10,7 @@ No, a RWX PV can not be bounded to a ROX or RWO PVC.
 a RWX PV can be bounded to a RWX PVC.
 
 ## Smoketest
-* [ ] Create a RWO PVC which name is pvc-rwo-1
+* [ ] Create a RWO PVC which name is pvc-rwo-1 size 20G
 * [ ] Create a deployment which mount pvc-rwo-1 at mnt directory
 * [ ] Write a file in mnt directory
 * [ ] Scale down deployment replication from 1 to 0
@@ -20,6 +20,10 @@ a RWX PV can be bounded to a RWX PVC.
 * [ ] Read and write the file in mnt directory
 * [ ] Scale down deployment replications from 5 to 3
 * [ ] Scale down deployment replications from 3 to 1
+* [ ] resize pvc to 30G
+* [ ] check Pod
+* [ ] resize pvc to 15G
+* [ ] check Pod
 * [ ] If the pod scheduled to another node, read and write the file in mnt directory
 * [ ] Delete the deployment
 * [ ] Set spec.volume.persistentVolumeClaims.readOnly or  spec.containers.volumeMount.readOnly equal to true in deployment.
