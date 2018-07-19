@@ -74,3 +74,14 @@ $ APISERVER=$(kubectl config view | grep server | cut -f 2- -d ":" | tr -d " ")
 $ TOKEN=$(kubectl describe secret $(kubectl get secrets | grep default | cut -f1 -d ' ') | grep -E '^token' | cut -f2 -d':' | tr -d '\t')
 $ curl -i -H "Authorization: Bearer TOKEN" https://192.168.0.80:6443/api/v1/namespaces/default/services/kubernetes
 ```
+
+## Mount Propagation
+```
+/etc/kubernetes/kubelet.env
+```
+
+## tolerance everything
+```
+tolerations:
+- operator: "Exists"
+```
