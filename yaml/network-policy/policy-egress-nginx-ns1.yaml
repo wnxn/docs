@@ -1,0 +1,16 @@
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: egress-nginx
+  namespace: ns1
+spec:
+  podSelector:
+    matchLabels:
+      app: kubectl
+  egress:
+  - to:
+    - ipBlock:
+        cidr: 10.96.0.0/16
+    ports:
+    - protocol: TCP
+      port: 8080

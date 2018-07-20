@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubectl
+  namespace: ns1
+  labels:
+    app: kubectl
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: kubectl
+  template:
+    metadata:
+      labels:
+        app: kubectl
+    spec:
+      imagePullSecrets:
+      - name: regcred
+      containers:
+      - name: nginx
+        image: dockerhub.qingcloud.com/wiley/kubectl:v1.0
+        ports:
+        - containerPort: 80
