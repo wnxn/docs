@@ -1,0 +1,14 @@
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: egress-nginx
+  namespace: ns1
+spec:
+  podSelector:
+    matchLabels:
+      app: kubectl
+  egress:
+  - to:  
+    - podSelector:
+        matchLabels:
+          app: nginx

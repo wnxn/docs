@@ -21,6 +21,13 @@ ssh-keygen
 ssh-copy-id -i ~/.ssh/id_rsa.pub root@192.168.1.16
 ```
 
+## LC_TYPE
+
+```
+export LC_ALL="en_US.UTF-8"
+export LC_CTYPE="en_US.UTF-8"
+```
+
 ## scp
 
 ```
@@ -52,7 +59,7 @@ go test -v mount_test.go TestRefreshAccessToken -count=1
 ## GO report
 [![Go Report Card](https://goreportcard.com/badge/github.com/yunify/qingcloud-csi)](https://goreportcard.com/report/github.com/yunify/qingcloud-csi)
 
-# CSI
+# Kubernetes
 
 ## csi-test
 
@@ -68,8 +75,6 @@ $ TOKEN=$(kubectl describe secret $(kubectl get secrets | grep default | cut -f1
 $ curl -i -H "Authorization: Bearer TOKEN" https://192.168.0.80:6443/api/v1/namespaces/default/services/kubernetes
 ```
 
-# Kubenetes
-
 ## Cloud Native
 
 - Horizontally scalable
@@ -77,3 +82,14 @@ $ curl -i -H "Authorization: Bearer TOKEN" https://192.168.0.80:6443/api/v1/name
 - Resilient and self healing
 - Minimal operator overhead
 - Decouple from the underlying platform
+
+## Mount Propagation
+```
+/etc/kubernetes/kubelet.env
+```
+
+## tolerance everything
+```
+tolerations:
+- operator: "Exists"
+```

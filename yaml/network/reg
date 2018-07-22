@@ -1,0 +1,1 @@
+kubectl create secret docker-registry regcred --docker-server=dockerhub.qingcloud.com --docker-username=wx --docker-password= --docker-email=wileywang@yunify.com --namespace=ns1
