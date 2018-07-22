@@ -34,6 +34,11 @@ export LC_CTYPE="en_US.UTF-8"
 scp -rP 10104 ./office root@192.168.176.56:~/
 ```
 
+## Crt
+```
+openssl x509 -noout -text -in ./apiserver.key
+```
+
 # Volume
 
 ## Mount table
