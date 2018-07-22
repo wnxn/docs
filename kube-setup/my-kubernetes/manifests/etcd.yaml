@@ -14,21 +14,21 @@ spec:
   - command:
     - etcd
     - --advertise-client-urls=https://127.0.0.1:2379
-    - --cert-file=/etc/kubernetes/pki/etcd/server.crt
+    - --cert-file=/etc/kubernetes/pki/etcd/server.pem
     - --client-cert-auth=true
     - --data-dir=/var/lib/etcd
     - --initial-advertise-peer-urls=https://127.0.0.1:2380
     - --initial-cluster=master=https://127.0.0.1:2380
-    - --key-file=/etc/kubernetes/pki/etcd/server.key
+    - --key-file=/etc/kubernetes/pki/etcd/server-key.pem
     - --listen-client-urls=https://127.0.0.1:2379
     - --listen-peer-urls=https://127.0.0.1:2380
     - --name=master
-    - --peer-cert-file=/etc/kubernetes/pki/etcd/peer.crt
+    - --peer-cert-file=/etc/kubernetes/pki/etcd/server.pem
     - --peer-client-cert-auth=true
-    - --peer-key-file=/etc/kubernetes/pki/etcd/peer.key
-    - --peer-trusted-ca-file=/etc/kubernetes/pki/etcd/ca.crt
+    - --peer-key-file=/etc/kubernetes/pki/etcd/server-key.pem
+    - --peer-trusted-ca-file=/etc/kubernetes/pki/etcd/ca.pem
     - --snapshot-count=10000
-    - --trusted-ca-file=/etc/kubernetes/pki/etcd/ca.crt
+    - --trusted-ca-file=/etc/kubernetes/pki/etcd/ca.pem
     image: k8s.gcr.io/etcd-amd64:3.2.18
     imagePullPolicy: IfNotPresent
     livenessProbe:
@@ -36,8 +36,8 @@ spec:
         command:
         - /bin/sh
         - -ec
-        - ETCDCTL_API=3 etcdctl --endpoints=https://[127.0.0.1]:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt
-          --cert=/etc/kubernetes/pki/etcd/healthcheck-client.crt --key=/etc/kubernetes/pki/etcd/healthcheck-client.key
+        - ETCDCTL_API=3 etcdctl --endpoints=https://[127.0.0.1]:2379 --cacert=/etc/kubernetes/pki/etcd/ca.pem
+          --cert=/etc/kubernetes/pki/etcd/server.pem --key=/etc/kubernetes/pki/etcd/server-key.pem
           get foo
       failureThreshold: 8
       initialDelaySeconds: 15
