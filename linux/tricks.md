@@ -69,8 +69,26 @@ heketi-cli topology info
 ## Test one testfile
 
 ```
-go test -v mount_test.go TestRefreshAccessToken -count=1
+go test -v instance_manager_test.go  instance_manager.go volume_manager.go util.go storage_class.go
 ```
+
+## Test one function
+```
+go test -v util_test.go util.go  -test.run TestByteCeilToGb
+```
+## Test output log
+
+```
+func TestMain(m *testing.M) {
+        flag.Set("alsologtostderr", "true")
+        flag.Set("log_dir", "/tmp")
+        flag.Set("v", "3")
+        flag.Parse()
+        ret := m.Run()
+        os.Exit(ret)
+}
+```
+
 
 ## GO report
 [![Go Report Card](https://goreportcard.com/badge/github.com/yunify/qingcloud-csi)](https://goreportcard.com/report/github.com/yunify/qingcloud-csi)
