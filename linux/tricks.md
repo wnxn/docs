@@ -1,12 +1,12 @@
 # Files
 
-## find files containing words
+## Find Files Containing Specific Word
 
 ```
 grep -R --include="*.go" storage-class ./
 ```
 
-## save files
+## Save Files
 
 ```
 cat <<EOF | sudo tee /the/file/path/filename
@@ -14,7 +14,7 @@ file context...
 EOF
 ```
 
-## free password login
+## Free Password Login
 
 ```
 ssh-keygen
@@ -28,10 +28,15 @@ export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 ```
 
-## scp
+## Scp
 
 ```
 scp -rP 10104 ./office root@192.168.176.56:~/
+```
+
+## Crt
+```
+openssl x509 -noout -text -in ./apiserver.key
 ```
 
 # Volume
@@ -48,26 +53,49 @@ cat /proc/mounts
 heketi-cli topology info
 ```
 
+## Mount Propagation Feature Gate
+```
+/etc/kubernetes/kubelet.env
+```
+
+## CSI Sanity Test
+
+```
+./csi-sanity --csi.endpoint=/var/lib/kubelet/plugins/csi-qingcloud/csi.sock
+```
+
 # Go
 
 ## Test one testfile
 
 ```
-go test -v mount_test.go TestRefreshAccessToken -count=1
+go test -v instance_manager_test.go  instance_manager.go volume_manager.go util.go storage_class.go
 ```
+
+## Test one function
+```
+go test -v util_test.go util.go  -test.run TestByteCeilToGb
+```
+## Test output log
+
+```
+func TestMain(m *testing.M) {
+        flag.Set("alsologtostderr", "true")
+        flag.Set("log_dir", "/tmp")
+        flag.Set("v", "3")
+        flag.Parse()
+        ret := m.Run()
+        os.Exit(ret)
+}
+```
+
 
 ## GO report
 [![Go Report Card](https://goreportcard.com/badge/github.com/yunify/qingcloud-csi)](https://goreportcard.com/report/github.com/yunify/qingcloud-csi)
 
 # Kubernetes
 
-## csi-test
-
-```
-./csi-sanity --csi.endpoint=/var/lib/kubelet/plugins/csi-qingcloud/csi.sock
-```
-
-## access apiserver by secret account toekn
+## Access Apiserver by SA
 
 ```
 $ APISERVER=$(kubectl config view | grep server | cut -f 2- -d ":" | tr -d " ")
@@ -83,12 +111,7 @@ $ curl -i -H "Authorization: Bearer TOKEN" https://192.168.0.80:6443/api/v1/name
 - Minimal operator overhead
 - Decouple from the underlying platform
 
-## Mount Propagation
-```
-/etc/kubernetes/kubelet.env
-```
-
-## tolerance everything
+## Scheduler Tolerance Everything
 ```
 tolerations:
 - operator: "Exists"

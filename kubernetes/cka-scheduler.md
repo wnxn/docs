@@ -1,5 +1,5 @@
 ## 核心概念 (19%)
-1. ~~理解Kubernetes API primitives~
+1. ~~理解Kubernetes API primitives~~
 1. ~~理解K8S集群架构~~
 1. ~~理解Service和其他网络primitives~~
 
