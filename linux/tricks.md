@@ -6,6 +6,16 @@
 grep -R --include="*.go" storage-class ./
 ```
 
+## Kubesphere
+
+```
+$ git diff pkg/app/app.go 
+-       go controllers.Run()
+
+ 
+
+```
+
 ## Save Files
 
 ```
@@ -93,6 +103,8 @@ func TestMain(m *testing.M) {
 ## GO report
 [![Go Report Card](https://goreportcard.com/badge/github.com/yunify/qingcloud-csi)](https://goreportcard.com/report/github.com/yunify/qingcloud-csi)
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/yunify/qingcloud-csi)](https://goreportcard.com/report/github.com/yunify/qingcloud-csi)
+
 # Kubernetes
 
 ## Access Apiserver by SA
@@ -115,4 +127,10 @@ $ curl -i -H "Authorization: Bearer TOKEN" https://192.168.0.80:6443/api/v1/name
 ```
 tolerations:
 - operator: "Exists"
+```
+# Mac
+
+## Daemon app
+```
+brew services list
 ```

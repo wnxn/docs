@@ -1,4 +1,4 @@
-## Download
+## 1 Download
 ```
 curl -L https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 -o cfssl
 chmod +x cfssl
@@ -8,7 +8,8 @@ curl -L https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64 -o cfssl-certinfo
 chmod +x cfssl-certinfo
 ```
 
-## Initial
+## 2 Create Crt and key by cfssl
+### 2.1 Initial
 ```
 mkdir cert
 cd cert
@@ -16,7 +17,7 @@ cd cert
 ../cfssl print-defaults csr > csr.json
 ```
 
-## Create JSON file
+### 2.2 Create JSON file
 ```
 cat ca-config.json
 {
@@ -39,7 +40,7 @@ cat ca-config.json
 }
 ```
 
-## CA CSR JSON file
+### 2.3 CA CSR JSON file
 ```
 cat ca-csr.json
 {
@@ -58,12 +59,12 @@ cat ca-csr.json
 }
 ```
 
-##  Create CA key and cert file
+### 2.4 Create CA key and cert file
 ```
 cfssl gencert -initca ca-csr.json | cfssljson -bare ca
 ```
 
-## Create Server CSR file
+### 2.5 Create Server CSR file
 
 ```
 cat server-csr.json
@@ -93,7 +94,7 @@ cat server-csr.json
 } 
 ```
 
-## Create Server cert and key file
+### 2.6 Create Server cert and key file
 ```
 cfssl gencert -ca=ca.pem -ca-key=ca-key.pem \
 --config=ca-config.json -profile=kubernetes \
@@ -102,14 +103,14 @@ server-csr.json | cfssljson -bare server
 
 > 
 
-## View the crt
+### 2.7 View the crt
 
 ```
 openssl x509  -noout -text -in ./server.crt
 ```
 
 
-## generate crt and key from ca.crt ca.key
+## 3 Generate crt and key from ca.crt ca.key
 ```
 openssl genrsa -out server.key 2048
 ```

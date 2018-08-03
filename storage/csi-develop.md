@@ -39,15 +39,13 @@ $ neonsan delete_volume -pool csi -volume foo3
 delete volume succeed.
 ```
 > return: 0
+
 - failed
 ```
 # neonsan delete_volume -pool csi -volume foo
 FATA[0000] Failed to delete volume:foo, reason:HTTP status:400  rc:-1 reason:Volume is opened 
 ```
 > return: 1
-
-> return 0
-
 
 - failed
 
@@ -163,7 +161,11 @@ dev_id  vol_id  device  volume  config  read_bps    write_bps   read_iops   writ
 
 ```
 
-# Deploy
+# Install NeonSAN client and QBD client
+
+## Installation on Host
+Host OS: ubuntu 16.04
+Host OS kernel version: 4.4.0-116-generic
 
 ```
 dpkg -i pitrix-libneonsan-dev-1.1.0.0.0.1.deb
@@ -175,4 +177,15 @@ dpkg -i pitrix-dep-qbd-1.1.0.amd64.deb
 $ sudo cp librdmacm.so.1 /usr/lib
 $ sudo cp libibverbs.so.1 /usr/lib
 $ sudo cp libnl.so.1 /usr/lib/
+```
+
+## Using QBD and Neonsan in Docker
+```
+docker run --rm --privileged --cap-add=ALL -ti -v /usr/bin:/usr/bin -v /usr/sbin:/usr/sbin -v /etc/neonsan:/etc/neonsan -v /lib:/lib -v /usr/lib:/usr/lib -v /mnt:/mnt -v /dev:/dev ubuntu:16.04
+```
+## Kernel module
+```
+/var/lib/dpkg/info/pitrix-dep-qbd.postinst: 20: /var/lib/dpkg/info/pitrix-dep-qbd.postinst: depmod: not found
+/var/lib/dpkg/info/pitrix-dep-qbd.postinst: 21: /var/lib/dpkg/info/pitrix-dep-qbd.postinst: update-initramfs: not found
+apt-get install initramfs-tools
 ```
