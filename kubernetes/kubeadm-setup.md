@@ -124,6 +124,11 @@ kubeadm join ...
 kubeadm join 192.168.1.13:6443 --token ip7z2d.55k6h6i2gbm72sjb --discovery-token-ca-cert-hash sha256:0854371de4b316007cd3cdc2acc32d4091e91551b074a082054d63ee7ed750b2
 ```
 
+```
+kubeadm token list
+kubeadm join --discovery-token-unsafe-skip-ca-verification --token=102952.1a7dd4cc8d1f4cc5 172.17.0.54:6443
+```
+
 ## Tips
 1. 官方安装手册： https://kubernetes.io/docs/setup/independent/install-kubeadm/#verify-the-mac-address-and-product_uuid-are-unique-for-every-node
 2. kubeadm init参数手册： https://kubernetes.io/docs/reference/setup-tools/kubeadm/kubeadm-init/#config-file
