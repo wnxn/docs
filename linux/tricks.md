@@ -76,15 +76,36 @@ heketi-cli topology info
 
 # Go
 
+## Installation
+
+> https://golang.org/doc/install
+```
+wget https://dl.google.com/go/go1.10.3.linux-amd64.tar.gz
+tar -xf go1.10.3.linux-amd64.tar.gz
+mv go /usr/local
+```
+
+```
+echo "export GOPATH=/root/mygo" >> /etc/profile
+echo "export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin:/usr/local/bin" >> /etc/profile
+source /etc/profile
+go version
+mkdir -p /root/mygo/src /root/mygo/pkg /root/mygo/bin
+```
+
+```
+
+```
+
 ## Test one testfile
 
 ```
-go test -v instance_manager_test.go  instance_manager.go volume_manager.go util.go storage_class.go
+go test -v instance_manager_test.go  instance_manager.go volume_manager.go util.go storage_class.go -count=1
 ```
 
 ## Test one function
 ```
-go test -v util_test.go util.go  -test.run TestByteCeilToGb
+go test -v util_test.go util.go  -test.run TestByteCeilToGb -count=1
 ```
 ## Test output log
 
