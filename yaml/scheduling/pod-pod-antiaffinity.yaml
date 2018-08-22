@@ -6,7 +6,7 @@ metadata:
     app: pod-affinity
 spec:
   affinity:
-    podAffinity:
+    podAntiAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
       - labelSelector:
           matchExpressions:
@@ -14,7 +14,7 @@ spec:
             operator: In
             values:
             - test
-        topologyKey: kubernetes.io/hostname
+        topologyKey: time
   containers:
   - name: with-node-affinity
     image: k8s.gcr.io/pause:2.0

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kubectl-with-sa
+  namespace: default
+  labels:
+    app: kubectl
+spec:
+  serviceAccountName: kubectl
+  containers:
+  - image: dockerhub.qingcloud.com/wiley/kubectl:v1.0
+    name: kubectl

@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kubectl
+  namespace: default
+  labels:
+    app: kubectl
+spec:
+  volumes:
+  - name: sec-ctx-vol
+    emptyDir: {}
+  securityContext:
+    runAsUser: 1000
+    fsGroup: 2000
+  containers:
+  - image: dockerhub.qingcloud.com/wiley/kubectl:v1.0
+    name: kubectl
+    volumeMounts:
+    - name: sec-ctx-vol
+      mountPath: /data/demo
