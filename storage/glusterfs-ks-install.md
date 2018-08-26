@@ -19,7 +19,7 @@
   +-----------------------+               +-----------------------+
 ```
 
-> 如需创建更大容量Glusterfs存储服务端，可挂载更大容量块存储至主机
+> 如需创建更大容量Glusterfs存储服务端，可挂载更大容量块存储磁盘至主机
 
 ## 安装步骤
 - 将要安装Gluster 3.12.12
@@ -323,7 +323,7 @@ Created symlink from /etc/systemd/system/multi-user.target.wants/heketi.service 
 ```
 
 ### 编辑拓扑文件（glusterfs-server1）
-> 9.12.18,25.28.32行需要按实际情况修改
+> 9,12,18,25,28,34行需要按实际情况修改
 
 ```
 root@glusterfs-server1:~# vim /etc/heketi/topology.json 

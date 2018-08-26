@@ -156,9 +156,21 @@ tolerations:
 brew services list
 ```
 
+## volume  service
+```
+sudo kill -9 `ps ax|grep 'coreaudio[a-z]' |awk '{print $1}'` 
+```
+
 # Git
 
 ## Big file
 ```
 git config --global http.postBuffer 524288000 
+```
+
+### Issues label
+```
+NEW FEATURES:
+BUG FIXES:
+IMPROVEMENTS:
 ```
