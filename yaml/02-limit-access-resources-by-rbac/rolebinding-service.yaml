@@ -1,0 +1,12 @@
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: read-services
+  namespace: default
+subjects:
+- kind: ServiceAccount
+  name: kubectl # Name is case sensitive
+roleRef:
+  kind: Role #this must be Role or ClusterRole
+  name: services-reader # this must match the name of the Role or ClusterRole you wish to bind to
+  apiGroup: rbac.authorization.k8s.io
