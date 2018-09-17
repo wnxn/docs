@@ -86,15 +86,16 @@ mv go /usr/local
 ```
 
 ```
-echo "export GOPATH=/root/mygo" >> /etc/profile
-echo "export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin:/usr/local/bin" >> /etc/profile
+echo 'export GOPATH=/root/mygo' >> /etc/profile
+echo 'export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin:/usr/local/bin' >> /etc/profile
 source /etc/profile
 go version
 mkdir -p /root/mygo/src /root/mygo/pkg /root/mygo/bin
 ```
 
+## Dep install
 ```
-
+curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 ```
 
 ## Test one testfile
