@@ -12,8 +12,11 @@ grep -R --include="*.go" storage-class ./
 $ git diff pkg/app/app.go 
 -       go controllers.Run()
 
- 
+```
 
+## delete secret in different namespace
+```
+kubectl get ns --no-headers=true | awk '{print $1}' | xargs -i kubectl delete secret ceph-secret-user -n {}
 ```
 
 ## Save Files
