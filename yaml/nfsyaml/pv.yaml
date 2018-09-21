@@ -5,9 +5,12 @@ metadata:
 spec:
   capacity:
     storage: 5Gi
+  volumeMode: Filesystem
   accessModes:
     - ReadWriteMany
+  storageClassName: nfs-static
+  persistentVolumeReclaimPolicy: Delete
   nfs:
     # FIXME: use the right IP
-    server: 192.168.0.19
-    path: "/data/vol-1"
+    server: 192.168.1.5
+    path: "/home/pv-nfs"
