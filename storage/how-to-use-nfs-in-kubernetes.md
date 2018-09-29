@@ -1,15 +1,13 @@
 ## Preparation
 - Install NFS client
 
-> Install NFS client at Kubernetes nodes
+> Install NFS client on Kubernetes nodes
 ```
 $ sudo apt-get update
 $ sudo apt-get install nfs-common
 ```
 
-- Setup NFS server
-
-> IP: 192.168.1.5
+- Setup a NFS server
 
 ## Static Volume Provisioning
 
