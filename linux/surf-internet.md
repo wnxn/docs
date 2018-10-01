@@ -54,3 +54,7 @@ cat /etc/profile
 export http_proxy=http://127.0.0.1:8787
 export https_proxy=http://127.0.0.1:8787
 ```
+
+# Docker Proxy
+
+> https://docs.docker.com/config/daemon/systemd/#httphttps-proxy
