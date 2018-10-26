@@ -1,3 +1,9 @@
+# Install
+
+```
+
+```
+
 # Workflow
 ## Generate file
 
@@ -74,3 +80,11 @@ Failed: will see each step printed out up to the failure step.
 - only It, BeforeEach, JustBeforeEach, AfterEach and closure variable declarations in Container block, such as Describe and Conext
 
 - Mistake: an assertion in a container block.
+
+# FAQ
+
+## how to pass customize flag
+
+```
+ginkgo -- --hasCli=true
+```
