@@ -3,7 +3,7 @@
 |---|---|-----|-----|
 |specification | n. | 规范，格式| The primary focus of this specification is on the protocol ween a CO and a Plugin. |
 |compatibility| n.  | 兼容性  | promote cross-CO compatibility.  |
-|rivial    | adj.  | 不重要的，微不足道的  | for non-trivial applications when running in tainers  |
+|trivial    | adj.  | 不重要的，微不足道的  | for non-trivial applications when running in tainers  |
 |explicit    | adj.  | 清晰的，明白的  | has an explicit lifetime  |
 |afterwards   | adv.  | 以后，后来  |   |
 |downward   | adj.  | 下降的，向下的  | a downward API |

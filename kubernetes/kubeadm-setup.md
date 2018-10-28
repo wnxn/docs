@@ -103,10 +103,21 @@ kubeadm仅支持基于CNI的网络
 sysctl net.bridge.bridge-nf-call-iptables=1
 ```
 
-#### 创建flannel daemonset
+#### 创建 Flannel daemonset (可选择)
 
 ```
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/v0.9.1/Documentation/kube-flannel.yml
+```
+
+#### 创建 Calico （可选择）
+
+```
+kubectl apply -f https://docs.projectcalico.org/v3.1/getting-started/kubernetes/installation/hosted/rbac-kdd.yaml
+```
+
+> 修改 Pod CIDR
+```
+wget https://docs.projectcalico.org/v3.1/getting-started/kubernetes/installation/hosted/kubernetes-datastore/calico-networking/1.7/calico.yaml
 ```
 
 ### 调度pod给master（可选）
