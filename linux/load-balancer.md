@@ -125,3 +125,6 @@ curl EIP:NODE_PORT
 - On Switch host: succeed
 - On K8S node: failed
 - On other host: succeed
+
+## Reference
+[How-To: Redirecting network traffic to a new IP using IPtables](https://www.debuntu.org/how-to-redirecting-network-traffic-to-a-new-ip-using-iptables/)
