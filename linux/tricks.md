@@ -83,8 +83,8 @@ heketi-cli topology info
 
 > https://golang.org/doc/install
 ```
-wget https://dl.google.com/go/go1.10.3.linux-amd64.tar.gz
-tar -xf go1.10.3.linux-amd64.tar.gz
+wget https://dl.google.com/go/go1.11.2.linux-amd64.tar.gz
+tar -xf go1.11.2.linux-amd64.tar.gz
 mv go /usr/local
 ```
 

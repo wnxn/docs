@@ -1,7 +1,6 @@
 
 |生词  |词性   | 解释    | 例句     |
 |---|---|-----|-----|
-|specification | n. | 规范，格式| The primary focus of this specification is on the protocol ween a CO and a Plugin. |
 |compatibility| n.  | 兼容性  | promote cross-CO compatibility.  |
 |trivial    | adj.  | 不重要的，微不足道的  | for non-trivial applications when running in tainers  |
 |explicit    | adj.  | 清晰的，明白的  | has an explicit lifetime  |
@@ -51,4 +50,3 @@
 |provenance|n.|原产地，发源地|User or tool/system provenance information, such as URLs of related objects from other ecosystem components.|
 |one-off|a.|一次性的，非经常的|This is the simplest way to get started or to run a one-off task in a cluster.|
 |barring|perp|除非|barring any intentional network segmentation policies|
-|intentional|adj.|故意的||
