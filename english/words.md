@@ -50,3 +50,5 @@
 |provenance|n.|原产地，发源地|User or tool/system provenance information, such as URLs of related objects from other ecosystem components.|
 |one-off|a.|一次性的，非经常的|This is the simplest way to get started or to run a one-off task in a cluster.|
 |barring|perp|除非|barring any intentional network segmentation policies|
+|notoriously|v|声明狼藉，臭名昭著|However, XML is notoriously space intensive, and encoding/decoding it can impose a huge performance penalty on applications.|
+|segment|n|部分|Topology is a map of topological domains to topological segments.|
