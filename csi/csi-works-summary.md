@@ -3,8 +3,8 @@
 |:---:|:---:|:---:|
 |Provisioner|v1.0.0|Fri, Nov 16, 2018 7:23 AM|
 |Attacher|v1.0.0|Fri, Nov 16, 2018 11:14 AM|
-|Snapshotter|v1.0.0|Tue, Nov 20, 2018 2:14 PM|
-|driver registrar|v1.0.0|Fri, Nov 16, 2018 6:56 AM|
+|Snapshotter|v1.0.0-rc3|Tue, Nov 20, 2018 2:14 PM|
+|driver registrar|v1.0.1|Fri, Nov 21, 2018 6:56 AM|
 |liveness probe|v0.4.1|Tue, Oct 23, 2018 11:22 AM|
 
 # Work List
@@ -22,3 +22,32 @@
 1. 不要将 PVC 和 Snapshot YAML 文件放在一起，创建延时问题。
 
 ## Advice
+
+
+# QingCloud Block Storage Verify
+## 用例
+
+> Volume capacity 50 GB, used 20 GB, format EXT4
+
+- 如何创建快照，耗时，快照大小（50 G 存储卷，20 G 内容, ext4）？ 4m 30s
+- 如何删除快照，耗时？3min
+- 删除存储卷后快照是否可用？ 可用
+- 从快照恢复存储卷耗时（50 G 存储卷，20 G 内容, ext4）？3m 50s
+
+- 能否从 HP 快照恢复为 SHP 的存储卷？否
+
+- 一个存储卷能否创建多个全量快照？ 是
+
+- 克隆硬盘
+
+- 扩容硬盘
+
+    - 必须大于原volume容量，HP增量为10GB。必须与主机解绑， 不能在线扩容。
+
+- 硬盘用量数据
+
+疑问
+- 快照命令一发送就 cut 吗？创建快照时写入数据会怎么样？
+- 进度条怎么得来的？
+- CLI 没有 克隆volume 命令?
+- 硬盘监控如何得到的
