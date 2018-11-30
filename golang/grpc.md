@@ -103,6 +103,95 @@
 
 ### 3.1 流处理
 
+#### 3.1.1 服务端流
+
+```
+rect := &pb.Rectangle{ ... }  // initialize a pb.Rectangle
+
+// NOTE: stream like a server
+stream, err := client.ListFeatures(context.Background(), rect)
+if err != nil {
+    ...
+}
+for {
+
+    // NOTE: get points from server
+    feature, err := stream.Recv()
+    if err == io.EOF {
+        break
+    }
+    if err != nil {
+        log.Fatalf("%v.ListFeatures(_) = _, %v", client, err)
+    }
+    log.Println(feature)
+}
+```
+
+#### 3.1.2 客户端流
+```
+// Create a random number of random points
+r := rand.New(rand.NewSource(time.Now().UnixNano()))
+pointCount := int(r.Int31n(100)) + 2 // Traverse at least two points
+var points []*pb.Point
+for i := 0; i < pointCount; i++ {
+	points = append(points, randomPoint(r))
+}
+log.Printf("Traversing %d points.", len(points))
+
+// NOTE: stream like a server
+stream, err := client.RecordRoute(context.Background())
+if err != nil {
+	log.Fatalf("%v.RecordRoute(_) = _, %v", client, err)
+}
+
+for _, point := range points {
+
+    // NOTE: send points to server side
+	if err := stream.Send(point); err != nil {
+		log.Fatalf("%v.Send(%v) = %v", stream, point, err)
+	}
+}
+
+// NOTE: get result from server
+reply, err := stream.CloseAndRecv()
+if err != nil {
+	log.Fatalf("%v.CloseAndRecv() got error %v, want %v", stream, err, nil)
+}
+log.Printf("Route summary: %v", reply)
+```
+#### 3.1.3 双向流
+
+```
+stream, err := client.RouteChat(context.Background())
+waitc := make(chan struct{})
+go func() {
+	for {
+        // NOTE: read from server
+		in, err := stream.Recv()
+		if err == io.EOF {
+			// read done.
+			close(waitc)
+			return
+		}
+		if err != nil {
+			log.Fatalf("Failed to receive a note : %v", err)
+		}
+		log.Printf("Got message %s at point(%d, %d)", in.Message, in.Location.Latitude, in.Location.Longitude)
+	}
+}()
+for _, note := range notes {
+    // NOTE: send to server
+	if err := stream.Send(note); err != nil {
+		log.Fatalf("Failed to send a note: %v", err)
+	}
+}
+stream.CloseSend()
+<-waitc
+```
+
+> Q: waitc 通道作用？
+    
+    A: 由于是双向流，必须等 go routine 的接受流接收到服务端端开请求 EOF，客户端进程才能退出。
 ### 3.2 超时器
 
 ### 3.3 截断器
@@ -120,3 +209,9 @@
 ## 4. 问题
 
 1. enum 定义是否可以放在 message 定义外面？
+
+    答：可以，You can define enums within a message definition, as in the above example, or outside – these enums can be reused in any message definition in your .proto file.  [link](https://developers.google.com/protocol-buffers/docs/proto#enum)
+
+2. 是否必须实现所有grpc service方法？
+    
+    答：是，不然无法注册开发者实现的服务端 struct 到 grpc 服务端中。
