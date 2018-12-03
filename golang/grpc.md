@@ -212,6 +212,8 @@ stream.CloseSend()
 
     答：可以，You can define enums within a message definition, as in the above example, or outside – these enums can be reused in any message definition in your .proto file.  [link](https://developers.google.com/protocol-buffers/docs/proto#enum)
 
-2. 是否必须实现所有grpc service方法？
+1. 是否必须实现所有grpc service方法？
     
     答：是，不然无法注册开发者实现的服务端 struct 到 grpc 服务端中。
+
+1. UnaryInterceptor 在 stream rpc 中是否会失效？ 
