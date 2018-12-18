@@ -194,7 +194,49 @@ stream.CloseSend()
     A: 由于是双向流，必须等 go routine 的接受流接收到服务端端开请求 EOF，客户端进程才能退出。
 ### 3.2 超时器
 
+#### 3.2.1 服务端超时器
+
+#### 3.2.2 客户端超时器
+
 ### 3.3 截断器
+
+#### 3.3.1 开发者开发符合截断器签名的函数
+
+一元服务端截断器函数签名
+```
+type UnaryServerInterceptor 
+func(
+    ctx context.Context, 
+    req interface{}, 
+    info *UnaryServerInfo, 
+    handler UnaryHandler
+    ) (resp interface{}, err error)
+```
+
+流服务端截断器函数签名
+```
+type StreamServerInterceptor 
+func(
+    srv interface{}, 
+    ss ServerStream, 
+    info *StreamServerInfo, 
+    handler StreamHandler
+    ) error
+```
+
+#### 3.3.2 gRPC帮助函数，从函数签名转换为 ServerOption 对象
+
+生成 ServerOption
+```
+func UnaryInterceptor(i UnaryServerInterceptor) ServerOption
+func StreamInterceptor(i StreamServerInterceptor) ServerOption
+```
+
+#### 3.3.3 创建服务端时填入 ServerOption，填入截断器函数信息
+截断器选项从 ServerOption 里填入
+```
+grpc.NewServer(opt...ServerOption) *Server
+```
 
 ### 3.4 异步
 

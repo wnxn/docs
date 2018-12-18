@@ -1,11 +1,12 @@
 # Kubernetes CSI Version List
 |Component|Version|Date|
 |:---:|:---:|:---:|
-|Provisioner|v1.0.0|Fri, Nov 16, 2018 7:23 AM|
-|Attacher|v1.0.0|Fri, Nov 16, 2018 11:14 AM|
-|Snapshotter|v1.0.0-rc3|Tue, Nov 20, 2018 2:14 PM|
+|Provisioner|v1.0.1|Dec 6, 2018 7:23 AM|
+|Attacher|v1.0.1| Dec 6, 2018 11:14 AM|
+|Snapshotter|v1.0.1| Dec 6, 2018 2:14 PM|
 |driver registrar|v1.0.1|Fri, Nov 21, 2018 6:56 AM|
-|liveness probe|v0.4.1|Tue, Oct 23, 2018 11:22 AM|
+|liveness probe|v1.0.0|Nov 19, 2018 11:22 AM|
+|node driver registrar|v1.0.0-rc2| Dec 1, 2018|
 
 # Work List
 ## Community
