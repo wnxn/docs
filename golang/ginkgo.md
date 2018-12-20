@@ -1,7 +1,19 @@
-# Install
+# Usage
 
+## Add ginkgo in project
+```
+# vi Gopkg.toml
+[[override]]
+  name = "gopkg.in/fsnotify.v1"
+  source = "gopkg.in/fsnotify/fsnotify.v1"
+
+[[override]]
+  branch = "master"
+  name = "github.com/hpcloud/tail"
 ```
 
+```
+# dep ensure
 ```
 
 # Workflow
