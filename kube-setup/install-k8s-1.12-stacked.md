@@ -132,8 +132,8 @@ etcd:
       - 192.168.1.4
 networking:
   dnsDomain: cluster.local
-  podSubnet: 172.17.0.0/16
-  serviceSubnet: 10.96.0.0/12
+  podSubnet: 10.10.0.0/16
+  serviceSubnet: 10.96.0.0/16
 ```
 
 #### Move cert files
