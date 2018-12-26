@@ -1,4 +1,4 @@
-# How to install Kubernetes 1.12
+# How to install Kubernetes with external Etcd
 
 > https://v1-12.docs.kubernetes.io/docs/setup/independent/high-availability/
 
