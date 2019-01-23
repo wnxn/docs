@@ -1,6 +1,8 @@
-# Flex volume 存储卷迁移
+# 跨区迁移 Flex volume 存储卷
 
-## 在集群 1
+跨区迁移前请先将重要数据备份，文中重要的字段用 "<>" 表明。
+
+## 在A区集群 1
 
 - 动态创建 Flex Volume PVC
 - 将 PVC 挂载至工作负载，写入数据
@@ -9,8 +11,10 @@
 - 删除 PVC 和 PV
 
 ### 创建 PVC
+
+- 编写 PVC YAML 定义文件
 ```
-# cat pvc-cluster1.yaml
+# cat pvc.yaml
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -25,97 +29,28 @@ spec:
   storageClassName: qingcloud-storageclass
 ```
 
+- 创建 PVC
 ```
-kubectl create -f pvc-cluster1.yaml
+kubectl create -f pvc.yaml
 ```
 
-### 检查 PVC
+- 等待 PVC 创建成功
 ```
 # kubectl get pvc
 NAME           STATUS    VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS             AGE
-pvc-cluster1   Bound     pvc-77b34fe0-1d79-11e9-95bd-5254a6631c8c   10Gi       RWO            qingcloud-storageclass   21s
+pvc-cluster1   Bound     pvc-2cf1a4a3-1eb1-11e9-95bd-5254a6631c8c   10Gi       RWO            qingcloud-storageclass   21s
 ```
 
 ```
-# kubectl get pvc pvc-cluster1 -oyaml
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  annotations:
-    control-plane.alpha.kubernetes.io/leader: '{"holderIdentity":"abaa88ca-1d76-11e9-9e52-5254a6631c8c","leaseDurationSeconds":15,"acquireTime":"2019-01-21T12:38:37Z","renewTime":"2019-01-21T12:38:51Z","leaderTransitions":0}'
-    pv.kubernetes.io/bind-completed: "yes"
-    pv.kubernetes.io/bound-by-controller: "yes"
-    volume.beta.kubernetes.io/storage-provisioner: qingcloud/volume-provisioner
-  creationTimestamp: 2019-01-21T12:38:34Z
-  finalizers:
-  - kubernetes.io/pvc-protection
-  name: pvc-cluster1
-  namespace: default
-  resourceVersion: "4916"
-  selfLink: /api/v1/namespaces/default/persistentvolumeclaims/pvc-cluster1
-  uid: 77b34fe0-1d79-11e9-95bd-5254a6631c8c
-spec:
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      storage: 10Gi
-  storageClassName: qingcloud-storageclass
-  volumeMode: Filesystem
-  volumeName: pvc-77b34fe0-1d79-11e9-95bd-5254a6631c8c
-status:
-  accessModes:
-  - ReadWriteOnce
-  capacity:
-    storage: 10Gi
-  phase: Bound
-```
-
-### 检查 PV
+# kubectl get pv pvc-2cf1a4a3-1eb1-11e9-95bd-5254a6631c8c
+NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS    CLAIM                  STORAGECLASS             REASON    AGE
+pvc-2cf1a4a3-1eb1-11e9-95bd-5254a6631c8c   10Gi       RWO            Delete           Bound     default/pvc-cluster1   qingcloud-storageclass             2m
 
 ```
-# kubectl get pv pvc-77b34fe0-1d79-11e9-95bd-5254a6631c8c -oyaml
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  annotations:
-    Provisioner_Id: qingcloud/volume-provisioner
-    kubernetes.io/createdby: qingcloud-volume-provisioner
-    pv.kubernetes.io/provisioned-by: qingcloud/volume-provisioner
-  creationTimestamp: 2019-01-21T12:38:50Z
-  finalizers:
-  - kubernetes.io/pv-protection
-  name: pvc-77b34fe0-1d79-11e9-95bd-5254a6631c8c
-  resourceVersion: "4912"
-  selfLink: /api/v1/persistentvolumes/pvc-77b34fe0-1d79-11e9-95bd-5254a6631c8c
-  uid: 80dbcac0-1d79-11e9-95bd-5254a6631c8c
-spec:
-  accessModes:
-  - ReadWriteOnce
-  capacity:
-    storage: 10Gi
-  claimRef:
-    apiVersion: v1
-    kind: PersistentVolumeClaim
-    name: pvc-cluster1
-    namespace: default
-    resourceVersion: "4856"
-    uid: 77b34fe0-1d79-11e9-95bd-5254a6631c8c
-  flexVolume:
-    driver: qingcloud/flex-volume
-    fsType: ext4
-    options:
-      volumeID: vol-ttwtvfeb
-  persistentVolumeReclaimPolicy: Delete
-  storageClassName: qingcloud-storageclass
-  volumeMode: Filesystem
-status:
-  phase: Bound
-```
 
-### 将 PVC 挂载至工作负载
+### 创建 Deployment， 挂载 PVC
 ```
-# cat deploy-nginx.yaml
+# cat deploy.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -149,13 +84,13 @@ spec:
 ```
 # kubectl get po
 NAME                     READY     STATUS    RESTARTS   AGE
-nginx-67b6fdd64f-k4js6   1/1       Running   0          1m
+nginx-67b6fdd64f-zz8dk   1/1       Running   0          52s
 ```
 
 ### 在 PVC 内写入数据
 
 ```
-# kubectl exec -ti nginx-67b6fdd64f-k4js6 /bin/bash
+# kubectl exec -ti nginx-67b6fdd64f-zz8dk /bin/bash
 # cd /mnt
 # date >> tmp
 # echo cluster1 >> tmp
@@ -172,12 +107,12 @@ deployment.apps "nginx" deleted
 
 ### 编辑 PV 回收卷方式为 Retain
 ```
-# kubectl edit pv pvc-77b34fe0-1d79-11e9-95bd-5254a6631c8c
+# kubectl edit pv pvc-2cf1a4a3-1eb1-11e9-95bd-5254a6631c8c
 apiVersion: v1
 kind: PersistentVolume
 metadata:
   ...
-  name: pvc-77b34fe0-1d79-11e9-95bd-5254a6631c8c
+  name: pvc-2cf1a4a3-1eb1-11e9-95bd-5254a6631c8c
   ...
 spec:
   accessModes:
@@ -196,7 +131,7 @@ spec:
     fsType: ext4
     options:
       volumeID: vol-ttwtvfeb
-  persistentVolumeReclaimPolicy: Retain
+  persistentVolumeReclaimPolicy: <Retain>
   storageClassName: qingcloud-storageclass
   volumeMode: Filesystem
 status:
@@ -207,11 +142,20 @@ status:
 ```
 # kubectl delete pvc pvc-cluster1
 persistentvolumeclaim "pvc-cluster1" deleted
-# kubectl delete pv pvc-77b34fe0-1d79-11e9-95bd-5254a6631c8c
-persistentvolume "pvc-77b34fe0-1d79-11e9-95bd-5254a6631c8c" deleted
+# kubectl delete pv pvc-2cf1a4a3-1eb1-11e9-95bd-5254a6631c8c
+persistentvolume "pvc-2cf1a4a3-1eb1-11e9-95bd-5254a6631c8c" deleted
 ```
 
-## 在集群 2
+## 硬盘迁移
+
+- 在 QingCloud Console 内，1. A 区硬盘创建备份，2. 将 A 区硬盘迁移至 B 区，可参考跨区复制备份：https://docs.qingcloud.com/product/storage/volume/performance_volume/ ，3. 在 B 区从备份创建硬盘：https://docs.qingcloud.com/product/storage/snapshot#%E5%A4%87%E4%BB%BD%E5%AF%BC%E5%87%BA
+
+
+1. A 区创建硬盘（ID：vol-ttwtvfeb，Name：pvc-2cf1a4a3-1eb1-11e9-95bd-5254a6631c8c）的备份（ID：ss-7556enk7，Name：snap-vol-ttwtvfeb）,这一步可在 A 区集群 1 内 PVC 从 Workload 解绑后执行。
+2. A 区备份处选中备份，选择跨区复制备份到 B 区
+3. B 区备份处，选中备份（ID：ss-7556enk7，Name：snap-vol-ttwtvfeb），右单击创建硬盘（硬盘类型依据 B 区 Kubernetes 集群主机类型选定）（ID：vol-bf56v08y，Name：pvc-2cf1a4a3-1eb1-11e9-95bd-5254a6631c8c）
+
+## 在 B 区集群 2
 
 - 采用静态创建 PVC 方式，首先创建 PV，再创建 PVC，将 PVC 与 PV 绑定
 - 测试新的 PVC 是否可用，将 PVC 挂载至工作负载，检查 PVC 内数据
@@ -226,7 +170,7 @@ metadata:
     Provisioner_Id: qingcloud/volume-provisioner
     kubernetes.io/createdby: qingcloud-volume-provisioner
     pv.kubernetes.io/provisioned-by: qingcloud/volume-provisioner
-  name: pvc-77b34fe0-1d79-11e9-95bd-5254a6631c8c
+  name: <pvc-2cf1a4a3-1eb1-11e9-95bd-5254a6631c8c>
 spec:
   capacity:
     storage: 10Gi
@@ -239,7 +183,7 @@ spec:
     driver: qingcloud/flex-volume
     fsType: ext4
     options:
-      volumeID: vol-ttwtvfeb
+      volumeID: <vol-bf56v08y>
 ```
 
 ```
@@ -262,7 +206,7 @@ spec:
       storage: 10Gi
   storageClassName: qingcloud-storageclass
   volumeMode: Filesystem
-  volumeName: pvc-77b34fe0-1d79-11e9-95bd-5254a6631c8c
+  volumeName: <pvc-2cf1a4a3-1eb1-11e9-95bd-5254a6631c8c>
 ```
 
 ```
@@ -273,13 +217,13 @@ kubectl create -f pvc.yaml
 ```
 # kubectl get pvc
 NAME           STATUS    VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS             AGE
-pvc-cluster1   Bound     pvc-77b34fe0-1d79-11e9-95bd-5254a6631c8c   10Gi       RWO            qingcloud-storageclass   10m
+pvc-cluster1   Bound     pvc-2cf1a4a3-1eb1-11e9-95bd-5254a6631c8c   10Gi       RWO            qingcloud-storageclass   10m
 ```
 
 ### 挂载 PVC 至工作负载
 
 ```
-# cat deploy-nginx.yaml
+# cat deploy.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -310,7 +254,7 @@ spec:
 ```
 
 ```
-kubectl create -f deploy-nginx.yaml
+kubectl create -f deploy.yaml
 ```
 
 ### 检查
@@ -324,7 +268,3 @@ nginx-67b6fdd64f-7xlf5   1/1       Running   0          1m
 Mon Jan 21 12:44:24 UTC 2019
 cluster1
 ```
-
-### 删除 PVC
-- 将 PVC 与 Workload 解绑
-- 删除 PVC 将会动态删除 PV 和 QingCloud 云平台块存储硬盘
