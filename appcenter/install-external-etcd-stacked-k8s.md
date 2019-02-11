@@ -238,10 +238,24 @@ sudo systemctl status etcd
 ```
 
 ```
+ETCDCTL_API=3 etcdctl -w table --endpoints=http://i-b75jnuz7:2379,i-hfpo2o8l:2379,i-hscdn8ry:2379 endpoint status
+```
+
+```
 #  etcdctl --endpoints=http://[192.168.1.3]:2379 cluster-health
 member 1667b822635af5d is healthy: got healthy result from http://192.168.1.4:2379
 member 288692ffb8a93e70 is healthy: got healthy result from http://192.168.1.3:2379
 member c59bcebe80c5afdb is healthy: got healthy result from http://192.168.1.5:2379
 cluster is healthy
 
+```
+
+```
+ETCDCTL_API=3 etcdctl --endpoints=http://[192.168.1.24]:2379 put /wx/test test1
+```
+
+```
+# ETCDCTL_API=3 etcdctl --endpoints=http://[192.168.1.24]:2379 get /wx/test
+/wx/test
+test1
 ```

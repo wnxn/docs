@@ -38,15 +38,21 @@ cd /image
 ./build-base.sh
 ```
 
-### 3.3 制作 KVM 镜像
+### 3.3 拷贝 confd 文件
+```
+cp -r /opt/kubernetes/confd/conf.d /etc/confd/
+cp -r /opt/kubernetes/confd/templates /etc/confd/
+```
+
+### 3.4 制作 KVM 镜像
 
 在 QingCloud Console 关闭主机，制作映像。
 
-### 3.4 修改 cluster.json.mustache
+### 3.5 修改 cluster.json.mustache
 
 将映像 id 填到 mustache 的 image 里
 
-### 3.5 打包 config 
+### 3.6 打包 config
 
 ```
 tar -cf config.tar /app/ha/config
