@@ -108,8 +108,8 @@ EOF
 tar -czf control-plane-certificates.tar.gz -T certificate_files.txt
 ```
 ```
-USER=ubuntu # customizable
-CONTROL_PLANE_IPS="192.168.1.4 192.168.1.5"
+USER=root # customizable
+CONTROL_PLANE_IPS="192.168.1.41 192.168.1.28"
 for host in ${CONTROL_PLANE_IPS}; do
     scp control-plane-certificates.tar.gz "${USER}"@$host:
 done
@@ -215,6 +215,19 @@ kubeadm join 192.168.1.251:6443 --token mcubzo.hhqwsed7spkdlva7 --discovery-toke
 
 kubeadm join 192.168.1.251:6443 --token 4u815j.nb8gryuvpgpotdop --discovery-token-ca-cert-hash sha256:770ea022dae4ea1d685f43232c170bab40e065b526616ec81211aff489b5f02c  --experimental-control-plane 
 
+kubeadm join 192.168.1.253:6443 --token ixdnnf.s61u90d07saezdmk --discovery-token-ca-cert-hash sha256:82388b38dc5404b1ad11f0dabf229e9ae580c5dd818d4f1a4f24ee5b4d0f0d9c --experimental-control-plane --ignore-preflight-errors=FileAvailable--etc-kubernetes-manifests
+
+### token
+```
+kubeadm token list 
+```
+
+### cert hash
+```
+openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //'
+```
+
+
 ## Network plugin
 
 Install Network plugin
@@ -225,7 +238,7 @@ Install Network plugin
 # mkdir /data/kubernetes/pki
 # rm -rf /etc/kubernetes
 # ln -s /data/kubernetes /etc/kubernetes
-# tar -xzf /home/ubuntu/control-plane-certificates.tar.gz -C /etc/kubernetes/pki --strip-components 3
+# tar -xzf /root/control-plane-certificates.tar.gz -C /etc/kubernetes/pki --strip-components 3
 ```
 
 ```
