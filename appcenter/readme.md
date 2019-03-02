@@ -89,3 +89,11 @@ mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
+
+## 4.4 主机日志
+
+> https://docs.qingcloud.com/appcenter/docs/debug.html
+
+```
+/opt/qingcloud/app-agent/log 
+```
