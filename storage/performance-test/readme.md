@@ -7,11 +7,11 @@ K8S 六种存储解决方案的性能比较测试（ https://mp.weixin.qq.com/s/
 ## 方案
 
 使用 FIO 测试工具收集硬盘 IOPS 和 带宽 数据。FIO 的测试方案文件以 FIO 项目的例子（https://github.com/axboe/fio/blob/master/examples/ssd-test.fio）为基础，略加修改。
-主机： ubuntu 16.04 8core8G
-硬盘：云平台硬盘性能型，容量型，SSD企业型，基础型，NeonSAN，副本数均为多副本。硬盘容量 100 GB，文件系统 Ext4.
-目的：测试容器内硬盘性能和云平台原生方法使用硬盘是否有性能上区别。
-测试工具：Kubernetes v1.12, FIO 2.2.10，QingCloud CSI v0.2.1
-测试内容：随机读测试，随机写测试，随机读写测试，顺序读测试，顺序写测试，顺序读写测试。数据包含 带宽 和 IOPS。
+- 主机： ubuntu 16.04 8core8G
+- 硬盘：云平台硬盘性能型，容量型，SSD企业型，基础型，NeonSAN，副本数均为多副本。硬盘容量 100 GB，文件系统 Ext4.
+- 目的：测试容器内硬盘性能和云平台原生方法使用硬盘是否有性能上区别。
+- 测试工具：Kubernetes v1.12, FIO 2.2.10，QingCloud CSI v0.2.1
+- 测试内容：随机读测试，随机写测试，随机读写测试，顺序读测试，顺序写测试，顺序读写测试。数据包含 带宽 和 IOPS。
 
 ## 测试方法
 
