@@ -1,10 +1,11 @@
 [global]
 bs=4k
 ioengine=libaio
-iodepth=4
+iodepth=16
 size=10g
 direct=1
 runtime=60
+numjobs=4
 
 [seq-read]
 rw=read
