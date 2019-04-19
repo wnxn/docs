@@ -132,6 +132,12 @@ func TestMain(m *testing.M) {
 
 # Kubernetes
 
+## build binary
+
+```
+CGO_ENABLED=0 GOOS=linux go build -a -ldflags '-extldflags "-static"' -o  _output/${BLOCK_PLUGIN_NAME} cmd/kubeadm/kubeadm.go
+```
+
 ## Access Apiserver by SA
 
 ```
