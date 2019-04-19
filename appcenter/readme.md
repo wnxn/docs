@@ -65,7 +65,10 @@ tar -cf config.tar /app/ha/config
 
 ```
 curl http://metadata/self
+AP2A
 curl http://192.168.253.5/self
+SH1B
+curl http://10.130.1.150/self
 ```
 
 ## 4.2 重新载入 confd 配置文件
