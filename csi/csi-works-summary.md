@@ -1,12 +1,27 @@
 # Kubernetes CSI Version List
-|Component|Version|Date|
-|:---:|:---:|:---:|
-|Provisioner|v1.0.1|Dec 6, 2018 7:23 AM|
-|Attacher|v1.0.1| Dec 6, 2018 11:14 AM|
-|Snapshotter|v1.0.1| Dec 6, 2018 2:14 PM|
-|driver registrar|v1.0.1|Fri, Nov 21, 2018 6:56 AM|
-|liveness probe|v1.0.0|Nov 19, 2018 11:22 AM|
-|node driver registrar|v1.0.0-rc2| Dec 1, 2018|
+Provisioner 
+    v1.0.1 2018-12-6
+    v1.1.0 2018-04-13 CSI v1.0.0 K8s v1.14
+Attacher    
+    v1.0.1 2018-12-6
+    v1.1.0 2018-04-5 CSI v1.0.0 k8s v1.14
+Snapshotter    
+    v1.0.1 2018-12-6
+    v1.1.0 2018-4-18
+Resizer
+    v0.1.0 2019-04-04 csi v1.1.0,k8s v1.14.0 docker pull quay.io/k8scsi/csi-resizer:v0.1.0
+driver registrar
+    v1.0.1 2018-11-21
+    v1.1.0 废弃，改为 cluster-driver-registrar 和 node-driver-registrar
+cluster-driver-registrar
+    v1.0.1 2018-12-19 k8s v1.14
+node-driver-registrar
+    v1.1.0 2019-04-13
+liveness probe  
+    v1.0.0  2018-11-19
+    v1.1.0  2019-04-16
+csi-test
+    v2.0.0 2019-04-02 适配 CSI v1.1.0
 
 # Work List
 ## Community
