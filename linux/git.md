@@ -9,7 +9,6 @@
 git push origin --delete volume-types
 ```
 
-
 ## PR 方式开发流程
 
 ### 前提条件
@@ -54,6 +53,7 @@ $ git branch -a
 * NEW_FEATURE
   master
 ```
+- 进行程序开发
 
 - 开发者上传到远端个人 fork 的仓库
 ```
@@ -65,3 +65,23 @@ git push origin NEW_FEATURE
 - 审核者 Github 审核和 squash 方式合并 PR
 
 - 批准 PR 后开发者删除新建的分支
+```
+$ git branch -D install-storage-client
+$ git push origin -d install-storage-client
+To https://github.com/wnxn/QKE.git
+ - [deleted]         install-storage-client
+```
+
+## 其他命令
+### 将本地 Git 分支强行与远程某分支同步
+
+```
+git fetch origin
+git reset --hard origin/FEATURE
+```
+
+### 与远端同步本地跟踪的远程分支
+
+```
+git fetch origin -p
+```
