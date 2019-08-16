@@ -85,3 +85,11 @@ git reset --hard origin/FEATURE
 ```
 git fetch origin -p
 ```
+
+### 撤销已执行操作
+```
+git reflog
+// 查看本地记录，寻找 id
+
+git reset --hard xxxx
+```
