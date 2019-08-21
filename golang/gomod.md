@@ -1,17 +1,26 @@
 # Go Modules 学习
 
-## 开始一个 Go mod 项目
-1. 在仓库内任意目录写代码
-1. 在仓库根目录执行 Go mod init {仓库 URL}
-1. 在仓库路径内的包 import path 为 仓库 URL+仓库内路径名
+## 创建 Go mod 新项目
+### 初始化
+> go.sum 保存 hash 值， go.mod 保存版本依赖信息
+> 会自动将缓存下载至 $GOPATH/pkg/mod
+```
+go mod init github.com/yunify/xxx
+```
 
-> Go mod 会将缓存下载至 $GOPATH/pkg/mod
+## 日常使用
+### 列出当前依赖
+```
+go list -m all
+```
 
-## 增加依赖
-> 列出当前 go module （第一行）和依赖（后续行）： go list -m all
-> go sum 保存 hash 值
+## 清理依赖
+```
+go mod tidy
+go list -m all
+```
 
-## 升级依赖
+### 按照版本添加依赖
 1. 列出依赖版本
 ```
 go list -m -versions rsc.io/sampler
@@ -22,16 +31,30 @@ go list -m -versions rsc.io/sampler
 go get rsc.io/sampler@v1.3.1
 ```
 
-## 增加新的主版本依赖
+### 添加特定依赖
+1. 修改 go.mod 文件
+
+1. 下载依赖
+```
+go mod download
+```
+
+## 原则
+### 增加新的主版本依赖
 > 每个主版本在 GO mod 里是不同的引用路径，从 v2 开始必须在路径后加 v2
 
-## 升级新的主版本依赖
-> 改 import 里的引用路径即可
 
-## 清理依赖
+### 升级新的主版本依赖
+> 改 import 里的引用路径即可
+> 
+
+### 不同的主版本依赖可以共存
+例如 rsc.io/quote 库可以让 v1.x.x 和 v3.x.x 版本共存
+
 ```
-go mod tidy
-go list -m all
+$ go list -m rsc.io/q...
+rsc.io/quote v1.5.2
+rsc.io/quote/v3 v3.1.0
 ```
 
 ## 工作流程
@@ -43,5 +66,5 @@ go list -m all
 
 ## 参考资料
 
-- Using Go Modules: https://blog.golang.org/using-go-modules
-- Modules: https://github.com/golang/go/wiki/Modules
+- 使用 Go Modules: https://blog.golang.org/using-go-modules
+- Modules 官方文档: https://github.com/golang/go/wiki/Modules

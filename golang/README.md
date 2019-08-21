@@ -1,0 +1,8 @@
+- [已读](gomod.md) ~~[使用 Go Modules 2019.3](https://blog.golang.org/using-go-modules)~~ 
+- [ ] [Modules 官方文档 更新中](https://github.com/golang/go/wiki/Modules)
+- [ ] [Go 覆盖率 2013.12](https://blog.golang.org/cover)
+- [ ] [包版本工具 2018.3](https://blog.golang.org/versioning-proposal)
+- [ ] [Go 版本管理 2018.2](https://research.swtch.com/vgo-import)
+- [ ] [版本号的含义 2.0.0](https://semver.org/#spec-item-9)
+- [ ] [为 Go 代码写文档](https://blog.golang.org/godoc-documenting-go-code)
+- [ ] [组织 Go 代码](https://blog.golang.org/organizing-go-code)
