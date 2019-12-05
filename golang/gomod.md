@@ -62,7 +62,9 @@ rsc.io/quote/v3 v3.1.0
 1. go build, go test 增加包依赖
 1. go list -m all 打印 go mod 管理的所有依赖
 1. go get 新增依赖/改变依赖版本
+1. go mod vendor(可选，需要vendor文件夹)
 1. go mod tidy 移除无用的依赖
+
 
 ## 参考资料
 
